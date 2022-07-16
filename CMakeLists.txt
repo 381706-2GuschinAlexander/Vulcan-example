@@ -9,10 +9,7 @@ endif()
 set(include_dir ${CMAKE_CURRENT_SOURCE_DIR}/src/lib)
 set(lib lib)
 
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src/lib)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src/main)
 
-file(GLOB subdirs "${CMAKE_CURRENT_SOURCE_DIR}/src/*")
-
-foreach(dir ${subdirs})
-    add_subdirectory(${dir})
-endforeach()
 
