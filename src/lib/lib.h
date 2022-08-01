@@ -5,8 +5,8 @@
 #include <glm/glm.hpp>
 
 struct Vertex {
-    glm::vec2 pos;
-    glm::vec3 color;
+    alignas(16) glm::vec2 pos;
+    alignas(16) glm::vec3 color;
 
 
     static VkVertexInputBindingDescription getBindingDescription() 
@@ -45,3 +45,24 @@ const std::vector<Vertex> vertices = {
 const std::vector<uint16_t> indices = {
     0, 1, 2, 2, 3, 0
 };
+
+
+
+struct UniformBufferObject {
+    alignas(16) glm::mat4 model;
+    alignas(16) glm::mat4 view;
+    alignas(16) glm::mat4 proj;
+
+    
+};
+
+static UniformBufferObject get_matrices(float time, float ratio){
+        return UniformBufferObject{
+            glm::mat4(1.0f),//glm::rotate(glm::mat4(1.0f), time * glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f)),
+            glm::lookAt(glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f)),
+            glm::perspective(glm::radians(60.0f), ratio, 0.1f, 10.0f)};
+    }
+
+
+
+
